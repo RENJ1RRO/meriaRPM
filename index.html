@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мэрия РПМ - Официальный портал Minecraft проекта</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF8C00;
+            --primary-dark: #E67E00;
+            --primary-light: #FFA733;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --dark-gray: #333333;
+            --text: #444444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--white);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(255, 140, 0, 0.8), rgba(230, 126, 0, 0.9)), url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--white);
+            color: var(--primary);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: var(--white);
+            border-color: var(--white);
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
+        /* Governor Section */
+        .governor-card {
+            display: flex;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .governor-image {
+            flex: 0 0 300px;
+            background: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=634&q=80') center/cover;
+        }
+        
+        .governor-info {
+            flex: 1;
+            padding: 2rem;
+        }
+        
+        .governor-info h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .governor-info p {
+            margin-bottom: 1.5rem;
+        }
+        
+        /* News Section */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .news-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .news-image {
+            height: 200px;
+            background-color: var(--primary-light);
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .news-content {
+            padding: 1.5rem;
+        }
+        
+        .news-date {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .news-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+        }
+        
+        .news-excerpt {
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+        
+        .read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Ideas Section */
+        .ideas-form {
+            background-color: var(--light-gray);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .footer-column p, .footer-column a {
+            color: #ccc;
+            margin-bottom: 0.8rem;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        /* Tabs for navigation */
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        /* Admin Panel */
+        .admin-panel {
+            background-color: var(--light-gray);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .admin-login {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .admin-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .admin-form {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .message {
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Minecraft-specific elements */
+        .minecraft-block {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: #8B8B8B;
+            border: 2px solid #6B6B6B;
+            margin: 0 5px;
+            vertical-align: middle;
+        }
+        
+        .minecraft-coords {
+            font-family: monospace;
+            background-color: #2d2d2d;
+            color: #7ec699;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .governor-card {
+                flex-direction: column;
+            }
+            
+            .governor-image {
+                flex: 0 0 200px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .ideas-form {
+                padding: 1.5rem;
+            }
+            
+            .admin-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-landmark"></i>
+                <div class="logo-text">
+                    <h1>Мэрия РПМ</h1>
+                    <p>Официальный портал Minecraft проекта</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link active" data-tab="home">Главная</a></li>
+                    <li><a href="#" class="nav-link" data-tab="news">Новости</a></li>
+                    <li><a href="#" class="nav-link" data-tab="ideas">Идеи и предложения</a></li>
+                    <li><a href="#" class="nav-link" data-tab="admin">Админ-панель</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Добро пожаловать в администрацию РПМ</h2>
+            <p>Мы работаем для развития нашего региона в мире Minecraft и улучшения качества жизни граждан</p>
+            <a href="#" class="btn" data-tab="ideas">Предложить идею</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Tab -->
+        <section id="home" class="tab-content active">
+            <div class="container">
+                <h2 class="section-title">О мэрии</h2>
+                
+                <div class="governor-card">
+                    <div class="governor-image"></div>
+                    <div class="governor-info">
+                        <h3>Губернатор РПМ</h3>
+                        <p>Уважаемые жители и гости нашего региона в Minecraft! Рад приветствовать вас на официальном портале администрации РПМ. Наша команда работает над созданием комфортных условий для жизни, развитием экономики и улучшением инфраструктуры в нашем виртуальном мире.</p>
+                        <p>Мы открыты для диалога и готовы рассмотреть ваши предложения по развитию региона. Вместе мы сможем сделать РПМ лучше!</p>
+                        <p>С уважением, Губернатор РПМ</p>
+                    </div>
+                </div>
+                
+                <h2 class="section-title">Наши приоритеты</h2>
+                
+                <div class="news-grid" id="home-news">
+                    <!-- News will be loaded here from localStorage -->
+                </div>
+            </div>
+        </section>
+
+        <!-- News Tab -->
+        <section id="news" class="tab-content">
+            <div class="container">
+                <h2 class="section-title">Новости РПМ</h2>
+                
+                <div class="news-grid" id="news-container">
+                    <!-- News will be loaded here from localStorage -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Ideas Tab -->
+        <section id="ideas" class="tab-content">
+            <div class="container">
+                <h2 class="section-title">Идеи и предложения</h2>
+                <p style="text-align: center; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Ваше мнение важно для нас! Поделитесь своими идеями и предложениями по улучшению жизни в нашем регионе в Minecraft. 
+                    Все поступившие предложения будут внимательно рассмотрены администрацией и отправлены на почту губернатора.
+                </p>
+                
+                <div class="ideas-form">
+                    <form id="suggestion-form" action="https://formspree.io/f/movkdgyv" method="POST">
+                        <div class="form-group">
+                            <label for="name">Ваше имя (никнейм в Minecraft)</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Введите ваше имя или никнейм" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Электронная почта (для обратной связи)</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Введите вашу почту" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category">Категория предложения</label>
+                            <select id="category" name="category" class="form-control" required>
+                                <option value="" disabled selected>Выберите категорию</option>
+                                <option value="infrastructure">Инфраструктура и строительство</option>
+                                <option value="transport">Транспорт и дороги</option>
+                                <option value="economy">Экономика и торговля</option>
+                                <option value="events">Мероприятия и события</option>
+                                <option value="laws">Законы и правила</option>
+                                <option value="other">Другое</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="suggestion">Ваше предложение</label>
+                            <textarea id="suggestion" name="suggestion" class="form-control" placeholder="Опишите вашу идею или предложение..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">Отправить предложение</button>
+                    </form>
+                </div>
+                
+                <div style="margin-top: 3rem; text-align: center;">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Контактная информация</h3>
+                    <p>Электронная почта губернатора: danilavakan@gmail.com</p>
+                    <p>Никнейм в Minecraft: Governor_RPM</p>
+                    <p>Координаты мэрии: <span class="minecraft-coords">X: 120, Y: 64, Z: -350</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Tab -->
+        <section id="admin" class="tab-content">
+            <div class="container">
+                <h2 class="section-title">Административная панель</h2>
+                
+                <div class="admin-panel">
+                    <div id="admin-login" class="admin-login">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Вход в админ-панель</h3>
+                        <p style="margin-bottom: 1.5rem;">Только губернатор имеет доступ к этой панели</p>
+                        
+                        <div class="form-group">
+                            <label for="admin-password">Пароль</label>
+                            <input type="password" id="admin-password" class="form-control" placeholder="Введите пароль">
+                        </div>
+                        
+                        <button id="login-btn" class="btn-primary" style="width: 100%;">Войти</button>
+                    </div>
+                    
+                    <div id="admin-content" class="hidden">
+                        <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Панель управления новостями</h3>
+                        
+                        <div class="admin-actions">
+                            <button id="add-news-btn" class="btn-primary">Добавить новость</button>
+                            <button id="manage-news-btn" class="btn-primary">Управление новостями</button>
+                            <button id="export-news-btn" class="btn-primary">Экспорт новостей</button>
+                            <button id="import-news-btn" class="btn-primary">Импорт новостей</button>
+                        </div>
+                        
+                        <div id="add-news-form" class="admin-form hidden">
+                            <h4 style="margin-bottom: 1rem;">Добавление новой новости</h4>
+                            
+                            <div class="form-group">
+                                <label for="news-title">Заголовок новости</label>
+                                <input type="text" id="news-title" class="form-control" placeholder="Введите заголовок">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="news-content">Текст новости</label>
+                                <textarea id="news-content" class="form-control" placeholder="Введите текст новости" rows="5"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="news-image">Ссылка на изображение (опционально)</label>
+                                <input type="text" id="news-image" class="form-control" placeholder="Введите URL изображения">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="news-date">Дата публикации</label>
+                                <input type="date" id="news-date" class="form-control">
+                            </div>
+                            
+                            <button id="save-news-btn" class="btn-primary">Опубликовать новость</button>
+                        </div>
+                        
+                        <div id="manage-news-list" class="hidden">
+                            <h4 style="margin-bottom: 1rem;">Управление существующими новостями</h4>
+                            <div id="news-list">
+                                <!-- News list will be populated here -->
+                            </div>
+                        </div>
+
+                        <div id="import-export-section" class="hidden">
+                            <div class="admin-form">
+                                <h4 style="margin-bottom: 1rem;">Экспорт новостей</h4>
+                                <p style="margin-bottom: 1rem;">Скопируйте этот код для резервного копирования или переноса новостей:</p>
+                                <textarea id="export-data" class="form-control" rows="5" readonly></textarea>
+                                <button id="copy-export-btn" class="btn-primary" style="margin-top: 1rem;">Копировать</button>
+                            </div>
+                            
+                            <div class="admin-form">
+                                <h4 style="margin-bottom: 1rem;">Импорт новостей</h4>
+                                <p style="margin-bottom: 1rem;">Вставьте код с новостями для импорта (существующие новости будут заменены):</p>
+                                <textarea id="import-data" class="form-control" rows="5" placeholder="Вставьте код с новостями здесь"></textarea>
+                                <button id="import-news-confirm-btn" class="btn-primary" style="margin-top: 1rem;">Импортировать новости</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Мэрия РПМ</h3>
+                <p>Официальный портал администрации региона РПМ в Minecraft. Мы работаем для вас!</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Полезные ссылки</h3>
+                <a href="#" class="nav-link" data-tab="home">Главная</a>
+                <a href="#" class="nav-link" data-tab="news">Новости</a>
+                <a href="#" class="nav-link" data-tab="ideas">Идеи и предложения</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Контакты в Minecraft</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Координаты мэрии: <span class="minecraft-coords">X: 120, Y: 64, Z: -350</span></p>
+                <p><i class="fas fa-user"></i> Губернатор: Governor_RPM</p>
+                <p><i class="fas fa-envelope"></i> Почта: danilavakan@gmail.com</p>
+                <p><i class="far fa-clock"></i> Игровое время: 24/7</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 Мэрия РПМ в Minecraft. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            // Load news from localStorage
+            loadNews();
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links and tabs
+                    navLinks.forEach(item => item.classList.remove('active'));
+                    tabContents.forEach(item => item.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Show corresponding tab
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                    
+                    // Scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+            
+            // Form Submission for ideas
+            const suggestionForm = document.getElementById('suggestion-form');
+            if (suggestionForm) {
+                // Formspree will handle the submission
+                // We'll just show a confirmation message
+                suggestionForm.addEventListener('submit', function(e) {
+                    // Formspree handles the actual submission
+                    // We'll just show a confirmation
+                    setTimeout(() => {
+                        alert('Спасибо! Ваше предложение отправлено губернатору. Мы рассмотрим его в ближайшее время.');
+                        suggestionForm.reset();
+                    }, 500);
+                });
+            }
+            
+            // Hero button to ideas tab
+            const heroButton = document.querySelector('.hero .btn');
+            if (heroButton) {
+                heroButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links and tabs
+                    navLinks.forEach(item => item.classList.remove('active'));
+                    tabContents.forEach(item => item.classList.remove('active'));
+                    
+                    // Add active class to ideas link
+                    document.querySelector('[data-tab="ideas"]').classList.add('active');
+                    document.getElementById('ideas').classList.add('active');
+                    
+                    // Scroll to ideas section
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+            
+            // Admin functionality
+            const adminPassword = "rpm2023"; // Change this to your desired password
+            const loginBtn = document.getElementById('login-btn');
+            const adminLogin = document.getElementById('admin-login');
+            const adminContent = document.getElementById('admin-content');
+            
+            if (loginBtn) {
+                loginBtn.addEventListener('click', function() {
+                    const passwordInput = document.getElementById('admin-password').value;
+                    
+                    if (passwordInput === adminPassword) {
+                        adminLogin.classList.add('hidden');
+                        adminContent.classList.remove('hidden');
+                    } else {
+                        alert('Неверный пароль!');
+                    }
+                });
+            }
+            
+            // Admin news management
+            const addNewsBtn = document.getElementById('add-news-btn');
+            const manageNewsBtn = document.getElementById('manage-news-btn');
+            const exportNewsBtn = document.getElementById('export-news-btn');
+            const importNewsBtn = document.getElementById('import-news-btn');
+            const addNewsForm = document.getElementById('add-news-form');
+            const manageNewsList = document.getElementById('manage-news-list');
+            const importExportSection = document.getElementById('import-export-section');
+            const saveNewsBtn = document.getElementById('save-news-btn');
+            const copyExportBtn = document.getElementById('copy-export-btn');
+            const importNewsConfirmBtn = document.getElementById('import-news-confirm-btn');
+            
+            if (addNewsBtn) {
+                addNewsBtn.addEventListener('click', function() {
+                    addNewsForm.classList.remove('hidden');
+                    manageNewsList.classList.add('hidden');
+                    importExportSection.classList.add('hidden');
+                    
+                    // Reset form
+                    document.getElementById('news-title').value = '';
+                    document.getElementById('news-content').value = '';
+                    document.getElementById('news-image').value = '';
+                    document.getElementById('news-date').valueAsDate = new Date();
+                });
+            }
+            
+            if (manageNewsBtn) {
+                manageNewsBtn.addEventListener('click', function() {
+                    addNewsForm.classList.add('hidden');
+                    manageNewsList.classList.remove('hidden');
+                    importExportSection.classList.add('hidden');
+                    displayNewsForManagement();
+                });
+            }
+            
+            if (exportNewsBtn) {
+                exportNewsBtn.addEventListener('click', function() {
+                    addNewsForm.classList.add('hidden');
+                    manageNewsList.classList.add('hidden');
+                    importExportSection.classList.remove('hidden');
+                    
+                    // Generate export data
+                    const news = getNewsFromStorage();
+                    document.getElementById('export-data').value = JSON.stringify(news, null, 2);
+                });
+            }
+            
+            if (importNewsBtn) {
+                importNewsBtn.addEventListener('click', function() {
+                    addNewsForm.classList.add('hidden');
+                    manageNewsList.classList.add('hidden');
+                    importExportSection.classList.remove('hidden');
+                    
+                    // Clear import field
+                    document.getElementById('import-data').value = '';
+                });
+            }
+            
+            if (saveNewsBtn) {
+                saveNewsBtn.addEventListener('click', function() {
+                    const title = document.getElementById('news-title').value;
+                    const content = document.getElementById('news-content').value;
+                    const image = document.getElementById('news-image').value;
+                    const dateInput = document.getElementById('news-date').value;
+                    
+                    if (!title || !content) {
+                        alert('Пожалуйста, заполните заголовок и текст новости');
+                        return;
+                    }
+                    
+                    const date = dateInput ? new Date(dateInput).toLocaleDateString('ru-RU') : new Date().toLocaleDateString('ru-RU');
+                    
+                    // Save news to localStorage
+                    saveNewsToStorage(title, content, image, date);
+                    
+                    // Reset form
+                    document.getElementById('news-title').value = '';
+                    document.getElementById('news-content').value = '';
+                    document.getElementById('news-image').value = '';
+                    document.getElementById('news-date').valueAsDate = new Date();
+                    
+                    // Reload news on the site
+                    loadNews();
+                    
+                    alert('Новость успешно опубликована!');
+                });
+            }
+            
+            if (copyExportBtn) {
+                copyExportBtn.addEventListener('click', function() {
+                    const exportData = document.getElementById('export-data');
+                    exportData.select();
+                    document.execCommand('copy');
+                    alert('Данные скопированы в буфер обмена!');
+                });
+            }
+            
+            if (importNewsConfirmBtn) {
+                importNewsConfirmBtn.addEventListener('click', function() {
+                    const importData = document.getElementById('import-data').value;
+                    
+                    if (!importData) {
+                        alert('Пожалуйста, введите данные для импорта');
+                        return;
+                    }
+                    
+                    try {
+                        const news = JSON.parse(importData);
+                        
+                        if (!Array.isArray(news)) {
+                            throw new Error('Некорректный формат данных');
+                        }
+                        
+                        // Save imported news to localStorage
+                        localStorage.setItem('rpm-news', importData);
+                        
+                        // Reload news on the site
+                        loadNews();
+                        
+                        alert('Новости успешно импортированы!');
+                    } catch (e) {
+                        alert('Ошибка при импорте данных: ' + e.message);
+                    }
+                });
+            }
+            
+            // Load news from localStorage and display
+            function loadNews() {
+                const newsContainer = document.getElementById('news-container');
+                const homeNewsContainer = document.getElementById('home-news');
+                
+                if (!newsContainer && !homeNewsContainer) return;
+                
+                const news = getNewsFromStorage();
+                
+                // Display latest 3 news on home page
+                if (homeNewsContainer) {
+                    homeNewsContainer.innerHTML = '';
+                    const latestNews = news.slice(0, 3);
+                    
+                    if (latestNews.length === 0) {
+                        homeNewsContainer.innerHTML = '<p style="text-align: center; grid-column: 1 / -1;">Новостей пока нет. Губернатор скоро добавит первые новости!</p>';
+                    } else {
+                        latestNews.forEach(item => {
+                            homeNewsContainer.appendChild(createNewsCard(item));
+                        });
+                    }
+                }
+                
+                // Display all news on news page
+                if (newsContainer) {
+                    newsContainer.innerHTML = '';
+                    
+                    if (news.length === 0) {
+                        newsContainer.innerHTML = '<p style="text-align: center; grid-column: 1 / -1;">Новостей пока нет. Губернатор скоро добавит первые новости!</p>';
+                    } else {
+                        news.forEach(item => {
+                            newsContainer.appendChild(createNewsCard(item));
+                        });
+                    }
+                }
+            }
+            
+            function createNewsCard(newsItem) {
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.dataset.id = newsItem.id;
+                
+                const imageUrl = newsItem.image || 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80';
+                
+                card.innerHTML = `
+                    <div class="news-image" style="background-image: url('${imageUrl}')"></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="far fa-calendar-alt"></i> ${newsItem.date}</div>
+                        <h3 class="news-title">${newsItem.title}</h3>
+                        <p class="news-excerpt">${newsItem.content.substring(0, 150)}${newsItem.content.length > 150 ? '...' : ''}</p>
+                        <a href="#" class="read-more" onclick="showFullNews(${newsItem.id})">Читать полностью <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                `;
+                
+                return card;
+            }
+            
+            function displayNewsForManagement() {
+                const newsList = document.getElementById('news-list');
+                const news = getNewsFromStorage();
+                
+                newsList.innerHTML = '';
+                
+                if (news.length === 0) {
+                    newsList.innerHTML = '<p>Новостей пока нет</p>';
+                    return;
+                }
+                
+                news.forEach(item => {
+                    const newsItem = document.createElement('div');
+                    newsItem.className = 'admin-form';
+                    newsItem.innerHTML = `
+                        <h4>${item.title}</h4>
+                        <p><strong>Дата:</strong> ${item.date}</p>
+                        <p>${item.content.substring(0, 100)}${item.content.length > 100 ? '...' : ''}</p>
+                        <button class="btn-primary" onclick="deleteNews(${item.id})" style="margin-top: 0.5rem;">Удалить</button>
+                    `;
+                    newsList.appendChild(newsItem);
+                });
+            }
+            
+            // Save news to localStorage
+            function saveNewsToStorage(title, content, image, date) {
+                const news = getNewsFromStorage();
+                const newNews = {
+                    id: Date.now(),
+                    title,
+                    content,
+                    image,
+                    date
+                };
+                
+                news.unshift(newNews); // Add to beginning of array
+                localStorage.setItem('rpm-news', JSON.stringify(news));
+            }
+            
+            // Get news from localStorage
+            function getNewsFromStorage() {
+                const newsJSON = localStorage.getItem('rpm-news');
+                return newsJSON ? JSON.parse(newsJSON) : [];
+            }
+            
+            // Delete news
+            window.deleteNews = function(id) {
+                if (confirm('Вы уверены, что хотите удалить эту новость?')) {
+                    let news = getNewsFromStorage();
+                    news = news.filter(item => item.id !== id);
+                    localStorage.setItem('rpm-news', JSON.stringify(news));
+                    
+                    // Refresh displays
+                    loadNews();
+                    displayNewsForManagement();
+                }
+            };
+            
+            // Show full news
+            window.showFullNews = function(id) {
+                const news = getNewsFromStorage();
+                const newsItem = news.find(item => item.id === id);
+                
+                if (newsItem) {
+                    // Create modal or redirect to a detailed view
+                    // For simplicity, we'll just show an alert with the full content
+                    alert(`Новость: ${newsItem.title}\n\n${newsItem.content}\n\nДата: ${newsItem.date}`);
+                }
+            };
+        });
+    </script>
+</body>
+</html>
