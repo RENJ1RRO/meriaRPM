@@ -3,609 +3,1289 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Аллисер Хорниголд - Кандидат на пост шерифа</title>
+    <title>Университет штата RPM North</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --black: #000000;
-            --dark-gray: #1a1a1a;
-            --gray: #2d2d2d;
-            --light-gray: #4a4a4a;
-            --white: #ffffff;
-            --accent: #e0e0e0;
+            --primary: #1a365d;
+            --secondary: #2d3748;
+            --accent: #e53e3e;
+            --light: #f7fafc;
+            --dark: #2d3748;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --danger: #f56565;
+            --gray: #a0aec0;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            background-color: var(--black);
-            color: var(--white);
+            background-color: #f5f5f5;
+            color: var(--dark);
             line-height: 1.6;
-            overflow-x: hidden;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+
+        /* Header Styles */
         header {
-            background-color: var(--black);
-            padding: 100px 0 80px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .main-title {
-            font-size: 5.5rem;
-            margin-bottom: 20px;
-            font-weight: 800;
-            background: linear-gradient(to right, #ffffff 0%, #a0a0a0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            letter-spacing: 3px;
-            line-height: 1.1;
-        }
-        
-        .tagline {
-            font-size: 1.8rem;
-            margin-bottom: 40px;
-            font-weight: 300;
-            color: var(--accent);
-            letter-spacing: 1px;
-        }
-        
-        .quick-info {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .info-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px 25px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .info-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-5px);
-        }
-        
-        section {
-            padding: 100px 0;
-        }
-        
-        .section-title {
-            font-size: 2.8rem;
-            margin-bottom: 60px;
-            text-align: center;
-            position: relative;
-            font-weight: 700;
-        }
-        
-        .section-title::after {
-            content: "";
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(to right, #ffffff 0%, #a0a0a0 100%);
-            border-radius: 2px;
-        }
-        
-        .bio-content {
-            max-width: 900px;
-            margin: 0 auto;
-            font-size: 1.15rem;
-        }
-        
-        .bio-content p {
-            margin-bottom: 25px;
-            color: var(--accent);
-        }
-        
-        .experience {
-            background-color: var(--dark-gray);
-        }
-        
-        .timeline {
-            max-width: 1000px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .timeline::before {
-            content: "";
-            position: absolute;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
             top: 0;
-            bottom: 0;
-            left: 50%;
-            width: 2px;
-            background-color: var(--light-gray);
-            transform: translateX(-50%);
+            z-index: 100;
         }
-        
-        .timeline-item {
+
+        .header-content {
             display: flex;
-            margin-bottom: 60px;
-            position: relative;
-        }
-        
-        .timeline-item:nth-child(odd) {
-            flex-direction: row-reverse;
-        }
-        
-        .timeline-content {
-            width: 45%;
-            padding: 30px;
-            background: var(--gray);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-        }
-        
-        .timeline-item:nth-child(odd) .timeline-content {
-            margin-left: auto;
-        }
-        
-        .timeline-item:nth-child(even) .timeline-content {
-            margin-right: auto;
-        }
-        
-        .timeline-content::after {
-            content: "";
-            position: absolute;
-            top: 30px;
-            width: 20px;
-            height: 20px;
-            background: var(--gray);
-            transform: rotate(45deg);
-        }
-        
-        .timeline-item:nth-child(odd) .timeline-content::after {
-            left: -10px;
-        }
-        
-        .timeline-item:nth-child(even) .timeline-content::after {
-            right: -10px;
-        }
-        
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            top: 30px;
-            width: 16px;
-            height: 16px;
-            background: linear-gradient(to right, #ffffff 0%, #a0a0a0 100%);
-            border-radius: 50%;
-            transform: translateX(-50%);
-            z-index: 1;
-            box-shadow: 0 0 0 4px var(--dark-gray);
-        }
-        
-        .timeline-item:nth-child(odd) .timeline-dot {
-            left: calc(50% - 8px);
-        }
-        
-        .timeline-item:nth-child(even) .timeline-dot {
-            left: calc(50% - 8px);
-        }
-        
-        .timeline-content h3 {
-            font-size: 1.6rem;
-            margin-bottom: 10px;
-            color: var(--white);
-        }
-        
-        .position {
-            font-weight: 600;
-            color: var(--accent);
-            margin-bottom: 5px;
-            font-size: 1.1rem;
-        }
-        
-        .duration {
-            color: var(--light-gray);
-            font-style: italic;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-        }
-        
-        .skills {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        
-        .skill-card {
-            background: var(--gray);
-            padding: 40px 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
         }
-        
-        .skill-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            background: var(--dark-gray);
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
-        
-        .skill-icon {
-            font-size: 3.5rem;
-            margin-bottom: 25px;
-            color: var(--white);
-            background: linear-gradient(to right, #ffffff 0%, #a0a0a0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        .logo img {
+            height: 60px;
         }
-        
-        .skill-card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 15px;
-            color: var(--white);
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
         }
-        
-        .skill-card p {
-            color: var(--accent);
-            line-height: 1.7;
+
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.8;
         }
-        
-        footer {
-            background-color: var(--dark-gray);
-            text-align: center;
-            padding: 50px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
         }
-        
-        .footer-content {
-            max-width: 600px;
-            margin: 0 auto;
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
         }
-        
-        .footer-logo {
-            font-size: 2.5rem;
-            font-weight: 800;
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('https://i.postimg.cc/jqWXNgHg/2025-11-18-23-21-38.png') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 54, 93, 0.7);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 700px;
+        }
+
+        .hero-content h2 {
+            font-size: 3rem;
             margin-bottom: 20px;
-            background: linear-gradient(to right, #ffffff 0%, #a0a0a0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 2px;
         }
-        
-        .footer-text {
-            color: var(--accent);
-            font-size: 1.1rem;
+
+        .hero-content p {
+            font-size: 1.2rem;
             margin-bottom: 30px;
         }
-        
-        .social-links {
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #c53030;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: #2d3748;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
             display: flex;
-            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            color: var(--accent);
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
+        }
+
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
             margin-top: 30px;
         }
-        
-        .social-link {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--gray);
+
+        .subject-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent);
+        }
+
+        .subject-card.selected {
+            border-color: var(--accent);
+            background-color: rgba(229, 62, 62, 0.05);
+        }
+
+        .subject-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .subject-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .grade-A { color: var(--success); font-weight: bold; }
+        .grade-B { color: #38a169; font-weight: bold; }
+        .grade-C { color: var(--warning); font-weight: bold; }
+        .grade-D { color: #dd6b20; font-weight: bold; }
+        .grade-E { color: var(--danger); font-weight: bold; }
+        .grade-F { color: #c53030; font-weight: bold; }
+        .grade-none { color: var(--gray); font-weight: normal; }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 30px 0 15px;
+            text-align: center;
+        }
+
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .mt-30 {
+            margin-top: 30px;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+
+        .mb-30 {
+            margin-bottom: 30px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Daily Report Styles */
+        .class-link {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .class-link select {
+            width: 200px;
+        }
+
+        .class-link input {
+            flex: 1;
+        }
+
+        .remove-link {
+            background-color: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        
-        .social-link:hover {
-            transform: translateY(-5px);
-            background: var(--light-gray);
-        }
-        
-        @media (max-width: 768px) {
-            .main-title {
-                font-size: 3.5rem;
-            }
-            
-            .tagline {
-                font-size: 1.4rem;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .timeline::before {
-                left: 30px;
-            }
-            
-            .timeline-item {
-                flex-direction: row !important;
-            }
-            
-            .timeline-content {
-                width: calc(100% - 80px);
-                margin-left: 80px !important;
-            }
-            
-            .timeline-content::after {
-                left: -10px !important;
-                right: auto !important;
-            }
-            
-            .timeline-dot {
-                left: 30px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .main-title {
-                font-size: 2.8rem;
-            }
-            
-            .tagline {
-                font-size: 1.2rem;
-            }
-            
-            .quick-info {
-                gap: 15px;
-            }
-            
-            .info-item {
-                padding: 12px 20px;
-                font-size: 1rem;
-            }
-        }
-        
-        /* Анимации */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease forwards;
-        }
-        
-        .delay-1 {
-            animation-delay: 0.2s;
-        }
-        
-        .delay-2 {
-            animation-delay: 0.4s;
-        }
-        
-        .delay-3 {
-            animation-delay: 0.6s;
+
+        .add-link {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
-                <h1 class="main-title fade-in">АЛЛИСЕР ХОРНИГОЛД</h1>
-                <p class="tagline fade-in delay-1">Кандидат на пост шерифа штата RPM</p>
-                <div class="quick-info">
-                    <div class="info-item fade-in delay-2">
-                        <strong>Место рождения:</strong> RPM
-                    </div>
-                    <div class="info-item fade-in delay-2">
-                        <strong>Возраст:</strong> 28 лет
-                    </div>
-                    <div class="info-item fade-in delay-3">
-                        <strong>Рост:</strong> 192 см
-                    </div>
-                    <div class="info-item fade-in delay-3">
-                        <strong>Вес:</strong> 75 кг
+                <div class="logo">
+                    <i class="fas fa-university fa-3x"></i>
+                    <div class="logo-text">
+                        <h1>Университет штата RPM North</h1>
+                        <p>Храм знаний и профессионального роста</p>
                     </div>
                 </div>
+                <nav>
+                    <ul>
+                        <li><a href="#subjects">Предметы</a></li>
+                        <li><a href="#daily-report">Отчетность</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </header>
 
-    <section class="biography">
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="container">
-            <h2 class="section-title fade-in">Биография</h2>
-            <div class="bio-content">
-                <p class="fade-in">Аллисер родился в штате RPM. С самого детства он был очень активным и любил быть в центре внимания. Уже в раннем возрасте он показывал, что умеет брать на себя ответственность и вести за собой других. В школе он часто организовывал разные мероприятия, устраивал спортивные соревнования и помогал учителям. Он всегда старался учиться хорошо, потому что понимал, что образование — это важно. Его друзья и учителя отмечали, что он умеет вдохновлять окружающих и всегда готов помочь тем, кто в этом нуждается.</p>
-                
-                <p class="fade-in">Когда Аллисер был подростком, он начал интересоваться историей своего города и страны. Он много времени проводил в библиотеках и музеях, изучая разные факты и события. Ему было интересно понять, как работают разные институты власти и что нужно делать, чтобы страна была безопасной и сильной. Это увлечение помогло ему понять, что он хочет связать свою жизнь с службой обществу и помогать людям.</p>
-                
-                <p class="fade-in">После окончания школы Аллисер решил пойти работать в правоохранительные органы. Он начал службу в полицейском департаменте штата RPM. Вначале он был рядовым, но благодаря своему трудолюбию и желанию учиться он быстро рос по служебной лестнице. Он стал одним из лучших в своем отделе и вскоре получил повышение. В полиции Аллисер научился работать в команде, быстро принимать решения и не бояться трудных ситуаций. Он видел, как много преступлений происходит в его городе, и понял, что нужно искать новые способы борьбы с ними.</p>
-                
-                <p class="fade-in">Со временем Аллисер решил попробовать свои силы в федеральных структурах. Он поступил в Федеральное бюро расследований — ФБР. Там он начал заниматься расследованием преступлений федерального уровня, таких как крупные мошенничества, террористические угрозы и другие сложные дела. Работа в ФБР научила его работать под давлением, быстро принимать важные решения и управлять сложными операциями. Он стал хорошим руководителем и командным игроком, потому что понимал, что успех зависит от работы всей команды.</p>
-                
-                <p class="fade-in">Чтобы лучше понять, как устроена власть и как можно влиять на ситуацию, Аллисер решил пройти службу в армии. Он стал лейтенантом и прошёл подготовку в специальных войсках. Там он научился тактике ведения боевых действий, а также тому, как организовать работу в сложных условиях. В армии он научился быстро реагировать на кризисные ситуации, держать себя в руках и помогать другим. Этот опыт очень ему пригодился в дальнейшем, потому что он понял, что в любой ситуации важно сохранять спокойствие и думать головой.</p>
-                
-                <p class="fade-in">После службы в армии Аллисер решил продолжить свою карьеру и стал преподавать в университете штата RPM North. Он очень хотел делиться своими знаниями и опытом с молодыми людьми, чтобы они тоже могли стать хорошими специалистами и служить обществу. В университете он преподавал разные предметы, связанные с управлением, безопасностью и правом. Его студенты очень ценили его за то, что он был простым и понятным учителем, который рассказывал о сложных вещах без лишних слов и с большим желанием помочь.</p>
-                
-                <p class="fade-in">Работа в университете дала Аллисеру возможность понять, что он хочет делать дальше. Он понял, что его главная цель — помогать людям и делать их жизнь безопаснее. Он продолжал учиться и развиваться, чтобы стать ещё лучше в своей профессии. В свободное время он часто общался с коллегами и студентами, участвовал в различных проектах и мероприятиях, связанных с безопасностью и развитием общества.</p>
+            <div class="hero-content">
+                <h2>Добро пожаловать в Университет RPM North</h2>
+                <p>Мы готовим специалистов, способных внести вклад в развитие нашего штата. Присоединяйтесь к нашему сообществу студентов и преподавателей!</p>
+                <a href="#subjects" class="btn">Начать обучение</a>
             </div>
         </div>
     </section>
 
-    <section class="experience">
+    <!-- Main Content -->
+    <main class="main-content">
         <div class="container">
-            <h2 class="section-title fade-in">Опыт работы</h2>
-            <div class="timeline">
-                <div class="timeline-item fade-in">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Полицейский департамент CPD</h3>
-                        <p class="position">Начальник Спецназа</p>
-                        <p class="duration">2 месяца</p>
+            <!-- Subjects Section -->
+            <section id="subjects" class="mb-30">
+                <div class="section-title">
+                    <h2>Проведение пар</h2>
+                </div>
+                
+                <!-- Subject Selection -->
+                <div class="card" id="subject-selection">
+                    <h3 class="card-title"><i class="fas fa-book"></i> Выберите предмет</h3>
+                    <p>Выберите предмет, по которому будет проводиться пара, и укажите количество студентов.</p>
+                    
+                    <div class="form-group mt-20">
+                        <label for="teacher-name">Ник преподавателя:</label>
+                        <input type="text" id="teacher-name" class="form-control" placeholder="Введите ваш никнейм">
+                    </div>
+                    
+                    <div class="form-group mt-20">
+                        <label for="student-count">Количество студентов:</label>
+                        <input type="number" id="student-count" class="form-control" min="1" max="50" value="8">
+                    </div>
+                    
+                    <div class="subject-grid mt-20">
+                        <div class="subject-card" data-subject="math">
+                            <div class="subject-icon">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <h3>Математика</h3>
+                            <p>Работа лаунчера, TG бот, подача жалоб</p>
+                        </div>
+                        <div class="subject-card" data-subject="physics">
+                            <div class="subject-icon">
+                                <i class="fas fa-atom"></i>
+                            </div>
+                            <h3>Физика</h3>
+                            <p>IC/OOC чаты, рации, правила войс чата</p>
+                        </div>
+                        <div class="subject-card" data-subject="informatics">
+                            <div class="subject-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3>Информатика</h3>
+                            <p>2FA, синхронизация ДС, GPS, телефон</p>
+                        </div>
+                        <div class="subject-card" data-subject="history">
+                            <div class="subject-icon">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                            <h3>История</h3>
+                            <p>Терминология, чаты, проверка на наборах</p>
+                        </div>
+                        <div class="subject-card" data-subject="literature">
+                            <div class="subject-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <h3>Литература</h3>
+                            <p>Правила университета и проекта</p>
+                        </div>
+                        <div class="subject-card" data-subject="social">
+                            <div class="subject-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>Обществознание</h3>
+                            <p>Конституция, фракции, экскурсия</p>
+                        </div>
+                        <div class="subject-card" data-subject="pe">
+                            <div class="subject-icon">
+                                <i class="fas fa-running"></i>
+                            </div>
+                            <h3>Физкультура</h3>
+                            <p>Отыгрыш РП, команды, войс</p>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-30">
+                        <button id="next-to-students" class="btn">Далее</button>
                     </div>
                 </div>
                 
-                <div class="timeline-item fade-in">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Федеральное бюро расследований (FBI)</h3>
-                        <p class="position">Специальный агент</p>
-                        <p class="duration">1 месяц</p>
+                <!-- Student Names Input -->
+                <div class="card hidden" id="student-names">
+                    <h3 class="card-title"><i class="fas fa-users"></i> Введите никнеймы студентов</h3>
+                    <p>Введите никнеймы студентов, присутствующих на паре.</p>
+                    
+                    <div id="name-inputs" class="mt-20">
+                        <!-- Dynamic inputs will be added here -->
+                    </div>
+                    
+                    <div class="text-center mt-30">
+                        <button id="next-to-material" class="btn">Продолжить</button>
                     </div>
                 </div>
                 
-                <div class="timeline-item fade-in">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Мэрия штата RPM</h3>
-                        <p class="position">Вице-губернатор</p>
-                        <p class="duration">4 месяц</p>
+                <!-- Material Display -->
+                <div class="card hidden" id="material-display">
+                    <h3 class="card-title"><i class="fas fa-chalkboard"></i> Материал для проведения пары</h3>
+                    <div id="material-content">
+                        <!-- Material will be loaded here based on subject -->
+                    </div>
+                    
+                    <div class="text-center mt-30">
+                        <button id="next-to-evaluation" class="btn">Материал объяснен</button>
                     </div>
                 </div>
                 
-                <div class="timeline-item fade-in">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Армия RPM</h3>
-                        <p class="position">Лейтенант</p>
-                        <p class="duration">2 месяца</p>
+                <!-- Evaluation -->
+                <div class="card hidden" id="evaluation-section">
+                    <h3 class="card-title"><i class="fas fa-clipboard-check"></i> Оценка студентов</h3>
+                    <p>Оцените ответы студентов на три основных вопроса и два дополнительных (по желанию).</p>
+                    
+                    <div class="table-container mt-20">
+                        <table id="evaluation-table">
+                            <thead>
+                                <tr>
+                                    <th>Студент</th>
+                                    <th>Вопрос 1</th>
+                                    <th>Вопрос 2</th>
+                                    <th>Вопрос 3</th>
+                                    <th>Доп. вопрос 1</th>
+                                    <th>Доп. вопрос 2</th>
+                                    <th>Ушел</th>
+                                    <th>Итоговая оценка</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rows will be added dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="text-center mt-30">
+                        <button id="generate-report" class="btn">Сгенерировать отчет</button>
+                        <button id="back-to-start" class="btn btn-secondary">Новая пара</button>
                     </div>
                 </div>
                 
-                <div class="timeline-item fade-in">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Мэрия штата RPM North</h3>
-                        <p class="position">Губернатор</p>
-                        <p class="duration">Успешный срок</p>
+                <!-- Report -->
+                <div class="card hidden" id="report-section">
+                    <h3 class="card-title"><i class="fas fa-file-alt"></i> Отчет по паре</h3>
+                    <p>Скопируйте этот текст для отправки в Discord:</p>
+                    
+                    <div class="card mt-20" style="background-color: #2d3748; color: white; font-family: monospace;">
+                        <pre id="report-content" style="white-space: pre-wrap; padding: 15px;"></pre>
+                    </div>
+                    
+                    <div class="text-center mt-30">
+                        <button id="copy-report" class="btn">Копировать отчет</button>
+                        <button id="back-to-start-2" class="btn btn-secondary">Новая пара</button>
                     </div>
                 </div>
-                
-                <div class="timeline-item fade-in">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Университет RPM North</h3>
-                        <p class="position">Преподаватель</p>
-                        <p class="duration">2 успешных срока</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item fade-in">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>SMI</h3>
-                        <p class="position">Редактор</p>
-                        <p class="duration">1 месяц</p>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <section class="skills-section">
+            <!-- Daily Report Section -->
+            <section id="daily-report" class="mb-30">
+                <div class="section-title">
+                    <h2>Дневная отчетность</h2>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-clipboard-list"></i> Отчет о работе за день</h3>
+                    <p>Заполните форму для создания дневного отчета о вашей работе.</p>
+                    
+                    <div class="form-group mt-20">
+                        <label for="report-date">Дата отчета:</label>
+                        <input type="date" id="report-date" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Ссылки на проведенные пары:</label>
+                        <div id="class-links">
+                            <div class="class-link">
+                                <select class="form-control class-subject">
+                                    <option value="math">Математика</option>
+                                    <option value="physics">Физика</option>
+                                    <option value="informatics">Информатика</option>
+                                    <option value="history">История</option>
+                                    <option value="literature">Литература</option>
+                                    <option value="social">Обществознание</option>
+                                    <option value="pe">Физкультура</option>
+                                </select>
+                                <input type="text" class="form-control class-link-input" placeholder="Введите ссылку на пару">
+                                <button type="button" class="remove-link"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <button type="button" id="add-class-link" class="add-link"><i class="fas fa-plus"></i> Добавить пару</button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="grades-count">Количество выставленных оценок:</label>
+                        <input type="number" id="grades-count" class="form-control" min="0" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="students-accepted">Количество принятых студентов:</label>
+                        <input type="number" id="students-accepted" class="form-control" min="0" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="students-screenshot">Ссылка на скриншот принятых студентов:</label>
+                        <input type="text" id="students-screenshot" class="form-control" placeholder="https://imgpile.com/p/2L8IaHz">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="events-count">Количество проведенных мероприятий:</label>
+                        <input type="number" id="events-count" class="form-control" min="0" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="events-screenshot">Ссылка на скриншот мероприятий:</label>
+                        <input type="text" id="events-screenshot" class="form-control" placeholder="https://imgpile.com/p/Ktbyl0P">
+                    </div>
+                    
+                    <div class="text-center mt-30">
+                        <button id="generate-daily-report" class="btn">Сгенерировать дневной отчет</button>
+                    </div>
+                </div>
+                
+                <div class="card hidden" id="daily-report-result">
+                    <h3 class="card-title"><i class="fas fa-file-alt"></i> Дневной отчет</h3>
+                    <p>Скопируйте этот текст для отправки в Discord:</p>
+                    
+                    <div class="card mt-20" style="background-color: #2d3748; color: white; font-family: monospace;">
+                        <pre id="daily-report-content" style="white-space: pre-wrap; padding: 15px;"></pre>
+                    </div>
+                    
+                    <div class="text-center mt-30">
+                        <button id="copy-daily-report" class="btn">Копировать отчет</button>
+                        <button id="back-to-daily-form" class="btn btn-secondary">Новый отчет</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
         <div class="container">
-            <h2 class="section-title fade-in">Ключевые навыки</h2>
-            <div class="skills">
-                <div class="skill-card fade-in">
-                    <div class="skill-icon">👮‍♂️</div>
-                    <h3>Правоохранительная деятельность</h3>
-                    <p>Опыт работы в полиции и ФБР, знание процедур и протоколов</p>
-                </div>
-                
-                <div class="skill-card fade-in">
-                    <div class="skill-icon">⚔️</div>
-                    <h3>Военная подготовка</h3>
-                    <p>Служба в армии, тактическая подготовка, управление в кризисных ситуациях</p>
-                </div>
-                
-                <div class="skill-card fade-in">
-                    <div class="skill-icon">🏛️</div>
-                    <h3>Государственное управление</h3>
-                    <p>Опыт работы на посту губернатора и вице-губернатора</p>
-                </div>
-                
-                <div class="skill-card fade-in">
-                    <div class="skill-icon">📚</div>
-                    <h3>Преподавание</h3>
-                    <p>Опыт работы в университете, передача знаний следующему поколению</p>
-                </div>
-                
-                <div class="skill-card fade-in">
-                    <div class="skill-icon">🤝</div>
-                    <h3>Лидерство</h3>
-                    <p>Умение вести за собой команду, принимать ответственные решения</p>
-                </div>
-                
-                <div class="skill-card fade-in">
-                    <div class="skill-icon">🔍</div>
-                    <h3>Расследования</h3>
-                    <p>Опыт работы в ФБР, расследование сложных дел</p>
-                </div>
+            <div class="copyright">
+                <p>Университет штата RPM North</p>
             </div>
         </div>
-    </section>
+    </footer>
 
     <script>
-        // Анимация появления элементов при скролле
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        const fadeInOnScroll = () => {
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.style.opacity = "1";
-                    element.style.transform = "translateY(0)";
-                }
-            });
+        // Subject materials (only guidelines, no examples)
+        const materials = {
+            math: `
+                <h4>Памятка по математике:</h4>
+                <p>Предмет необходим для объяснения:</p>
+                <ol>
+                    <li>Работы лаунчера RPM, как и об установщике</li>
+                    <li>Рассказа о telegram боте для помощи игрокам, о том как связаться через /ac как туда обратиться и для чего</li>
+                    <li>Способы и правила подачи жалоб на игроков и администрацию</li>
+                </ol>
+            `,
+            physics: `
+                <h4>Памятка по физике:</h4>
+                <p>На данном предмете ваша задача объяснить следующие темы:</p>
+                <ol>
+                    <li>IC и OOC чаты, различия и способы написания. Что такое МГ и Обратное МГ, способы отмены данных элементов</li>
+                    <li>IC и OOC рации, способы написания в них и назначения, отмена МГ в рации</li>
+                    <li>Правила войс чата, отмена МГ в войс чате</li>
+                </ol>
+            `,
+            informatics: `
+                <h4>Памятка по информатике:</h4>
+                <p>На предмете изучаем:</p>
+                <ol>
+                    <li>Установку /2fa</li>
+                    <li>Установку TG Protect</li>
+                    <li>Синхронизация с дискордом</li>
+                    <li>Использование GPS</li>
+                    <li>Использование телефона, вызовы, контакты и тому подобное</li>
+                </ol>
+            `,
+            history: `
+                <h4>Памятка по истории:</h4>
+                <p>Предмет нужен для изучения:</p>
+                <ol>
+                    <li>Всей терминологии используемой на проекте</li>
+                    <li>Повторения РП и НонРП чатов</li>
+                    <li>Изучение проверки терминов на наборах во фракции</li>
+                    <li>Продемонстрируйте и объясните как человеку пользоваться гардеробкой.</li>
+                </ol>
+            `,
+            literature: `
+                <h4>Памятка по литературе:</h4>
+                <p>Пара нужна для изучения:</p>
+                <ol>
+                    <li>Правила и основные понятия университета</li>
+                    <li>Основные правила проекта</li>
+                </ol>
+            `,
+            social: `
+                <h4>Памятка по обществознанию:</h4>
+                <p>Начинаем мы с классификации, конкретно смотрим по конституции</p>
+                <p>Рассказываем про деление на структуры, иерархию среди них. Из всей конституции нам нужны ещё обозначения фракций.</p>
+                <p>Потом приступаем к рассказу именно про фракции: Мэрия, СМИ, Больница, Армия, Полиция, ФБР.</p>
+            `,
+            pe: `
+                <h4>Памятка по физкультуре:</h4>
+                <p>Предмет имеет ключевую важность, поэтому реальная просьба для преподавательского состава подойти к его преподаванию с ответственностью.</p>
+                <p>На предмете ваша основная задача это научить человека использовать команды для отыгрыша РП и РПшить войсом.</p>
+                <p>Напоминаю команды для отыгрыша:</p>
+                <ul>
+                    <li>/me действие</li>
+                    <li>/do Состояние</li>
+                    <li>/todo Действие : Фраза</li>
+                    <li>/try Попытка</li>
+                </ul>
+            `
         };
-        
-        // Инициализация
-        window.addEventListener('DOMContentLoaded', () => {
-            fadeElements.forEach(element => {
-                element.style.opacity = "0";
-                element.style.transform = "translateY(20px)";
-                element.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+
+        // Subject names for daily report
+        const subjectNames = {
+            math: "Математика",
+            physics: "Физика", 
+            informatics: "Информатика",
+            history: "История",
+            literature: "Литература",
+            social: "Обществознание",
+            pe: "Физкультура"
+        };
+
+        // Application state
+        let currentState = {
+            selectedSubject: null,
+            studentCount: 0,
+            studentNames: [],
+            evaluations: [],
+            teacherName: ""
+        };
+
+        // DOM Elements
+        const subjectCards = document.querySelectorAll('.subject-card');
+        const teacherNameInput = document.getElementById('teacher-name');
+        const studentCountInput = document.getElementById('student-count');
+        const nextToStudentsBtn = document.getElementById('next-to-students');
+        const nameInputsContainer = document.getElementById('name-inputs');
+        const nextToMaterialBtn = document.getElementById('next-to-material');
+        const materialContent = document.getElementById('material-content');
+        const nextToEvaluationBtn = document.getElementById('next-to-evaluation');
+        const evaluationTable = document.getElementById('evaluation-table');
+        const generateReportBtn = document.getElementById('generate-report');
+        const backToStartBtn = document.getElementById('back-to-start');
+        const reportContent = document.getElementById('report-content');
+        const copyReportBtn = document.getElementById('copy-report');
+        const backToStart2Btn = document.getElementById('back-to-start-2');
+
+        // Daily Report Elements
+        const reportDateInput = document.getElementById('report-date');
+        const classLinksContainer = document.getElementById('class-links');
+        const addClassLinkBtn = document.getElementById('add-class-link');
+        const gradesCountInput = document.getElementById('grades-count');
+        const studentsAcceptedInput = document.getElementById('students-accepted');
+        const studentsScreenshotInput = document.getElementById('students-screenshot');
+        const eventsCountInput = document.getElementById('events-count');
+        const eventsScreenshotInput = document.getElementById('events-screenshot');
+        const generateDailyReportBtn = document.getElementById('generate-daily-report');
+        const dailyReportResult = document.getElementById('daily-report-result');
+        const dailyReportContent = document.getElementById('daily-report-content');
+        const copyDailyReportBtn = document.getElementById('copy-daily-report');
+        const backToDailyFormBtn = document.getElementById('back-to-daily-form');
+
+        // Sections
+        const subjectSelection = document.getElementById('subject-selection');
+        const studentNamesSection = document.getElementById('student-names');
+        const materialDisplaySection = document.getElementById('material-display');
+        const evaluationSection = document.getElementById('evaluation-section');
+        const reportSection = document.getElementById('report-section');
+
+        // Set current date as default
+        const today = new Date();
+        const formattedDate = today.toISOString().split('T')[0];
+        reportDateInput.value = formattedDate;
+
+        // Event Listeners
+        subjectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                subjectCards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                currentState.selectedSubject = card.dataset.subject;
+            });
+        });
+
+        nextToStudentsBtn.addEventListener('click', () => {
+            if (!currentState.selectedSubject) {
+                alert('Пожалуйста, выберите предмет');
+                return;
+            }
+            
+            if (!teacherNameInput.value.trim()) {
+                alert('Пожалуйста, введите ваш никнейм');
+                return;
+            }
+            
+            currentState.teacherName = teacherNameInput.value.trim();
+            currentState.studentCount = parseInt(studentCountInput.value);
+            if (currentState.studentCount < 1) {
+                alert('Количество студентов должно быть не менее 1');
+                return;
+            }
+            
+            renderNameInputs();
+            subjectSelection.classList.add('hidden');
+            studentNamesSection.classList.remove('hidden');
+        });
+
+        nextToMaterialBtn.addEventListener('click', () => {
+            const names = Array.from(document.querySelectorAll('.student-name-input'))
+                .map(input => input.value.trim())
+                .filter(name => name !== '');
+            
+            if (names.length !== currentState.studentCount) {
+                alert('Пожалуйста, заполните все поля с именами студентов');
+                return;
+            }
+            
+            currentState.studentNames = names;
+            renderMaterial();
+            studentNamesSection.classList.add('hidden');
+            materialDisplaySection.classList.remove('hidden');
+        });
+
+        nextToEvaluationBtn.addEventListener('click', () => {
+            renderEvaluationTable();
+            materialDisplaySection.classList.add('hidden');
+            evaluationSection.classList.remove('hidden');
+        });
+
+        generateReportBtn.addEventListener('click', () => {
+            generateReport();
+            evaluationSection.classList.add('hidden');
+            reportSection.classList.remove('hidden');
+        });
+
+        backToStartBtn.addEventListener('click', resetToStart);
+        backToStart2Btn.addEventListener('click', resetToStart);
+
+        copyReportBtn.addEventListener('click', () => {
+            const text = reportContent.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Отчет скопирован в буфер обмена!');
+            });
+        });
+
+        // Daily Report Event Listeners
+        addClassLinkBtn.addEventListener('click', () => {
+            addClassLink();
+        });
+
+        generateDailyReportBtn.addEventListener('click', () => {
+            generateDailyReport();
+        });
+
+        copyDailyReportBtn.addEventListener('click', () => {
+            const text = dailyReportContent.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Отчет скопирован в буфер обмена!');
+            });
+        });
+
+        backToDailyFormBtn.addEventListener('click', () => {
+            dailyReportResult.classList.add('hidden');
+        });
+
+        // Functions
+        function renderNameInputs() {
+            nameInputsContainer.innerHTML = '';
+            for (let i = 0; i < currentState.studentCount; i++) {
+                const inputGroup = document.createElement('div');
+                inputGroup.className = 'form-group';
+                
+                const label = document.createElement('label');
+                label.textContent = `Студент ${i + 1}:`;
+                
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'form-control student-name-input';
+                input.placeholder = `Введите никнейм студента ${i + 1}`;
+                
+                inputGroup.appendChild(label);
+                inputGroup.appendChild(input);
+                nameInputsContainer.appendChild(inputGroup);
+            }
+        }
+
+        function renderMaterial() {
+            if (currentState.selectedSubject && materials[currentState.selectedSubject]) {
+                materialContent.innerHTML = materials[currentState.selectedSubject];
+            }
+        }
+
+        function renderEvaluationTable() {
+            const tbody = evaluationTable.querySelector('tbody');
+            tbody.innerHTML = '';
+            
+            currentState.evaluations = [];
+            
+            currentState.studentNames.forEach((name, index) => {
+                const row = document.createElement('tr');
+                
+                // Student name
+                const nameCell = document.createElement('td');
+                nameCell.textContent = name;
+                row.appendChild(nameCell);
+                
+                // Question 1
+                const q1Cell = document.createElement('td');
+                q1Cell.innerHTML = `
+                    <select class="form-control question-eval" data-student="${index}" data-question="1">
+                        <option value="none" selected>-</option>
+                        <option value="correct">Правильно</option>
+                        <option value="incorrect">Неправильно</option>
+                        <option value="partial">50/50</option>
+                    </select>
+                `;
+                row.appendChild(q1Cell);
+                
+                // Question 2
+                const q2Cell = document.createElement('td');
+                q2Cell.innerHTML = `
+                    <select class="form-control question-eval" data-student="${index}" data-question="2">
+                        <option value="none" selected>-</option>
+                        <option value="correct">Правильно</option>
+                        <option value="incorrect">Неправильно</option>
+                        <option value="partial">50/50</option>
+                    </select>
+                `;
+                row.appendChild(q2Cell);
+                
+                // Question 3
+                const q3Cell = document.createElement('td');
+                q3Cell.innerHTML = `
+                    <select class="form-control question-eval" data-student="${index}" data-question="3">
+                        <option value="none" selected>-</option>
+                        <option value="correct">Правильно</option>
+                        <option value="incorrect">Неправильно</option>
+                        <option value="partial">50/50</option>
+                    </select>
+                `;
+                row.appendChild(q3Cell);
+                
+                // Additional question 1
+                const aq1Cell = document.createElement('td');
+                aq1Cell.innerHTML = `
+                    <select class="form-control additional-eval" data-student="${index}" data-question="4">
+                        <option value="none" selected>-</option>
+                        <option value="correct">Правильно</option>
+                        <option value="incorrect">Неправильно</option>
+                        <option value="partial">50/50</option>
+                    </select>
+                `;
+                row.appendChild(aq1Cell);
+                
+                // Additional question 2
+                const aq2Cell = document.createElement('td');
+                aq2Cell.innerHTML = `
+                    <select class="form-control additional-eval" data-student="${index}" data-question="5">
+                        <option value="none" selected>-</option>
+                        <option value="correct">Правильно</option>
+                        <option value="incorrect">Неправильно</option>
+                        <option value="partial">50/50</option>
+                    </select>
+                `;
+                row.appendChild(aq2Cell);
+                
+                // Left early
+                const leftCell = document.createElement('td');
+                leftCell.innerHTML = `
+                    <input type="checkbox" class="left-early" data-student="${index}">
+                `;
+                row.appendChild(leftCell);
+                
+                // Final grade
+                const gradeCell = document.createElement('td');
+                gradeCell.className = 'final-grade grade-none';
+                gradeCell.textContent = '-';
+                row.appendChild(gradeCell);
+                
+                tbody.appendChild(row);
+                
+                // Initialize evaluation object
+                currentState.evaluations[index] = {
+                    name: name,
+                    q1: 'none',
+                    q2: 'none',
+                    q3: 'none',
+                    aq1: 'none',
+                    aq2: 'none',
+                    left: false,
+                    grade: '-'
+                };
             });
             
-            window.addEventListener('scroll', fadeInOnScroll);
-            fadeInOnScroll(); // Проверить видимые элементы при загрузке
+            // Add event listeners for evaluation changes
+            document.querySelectorAll('.question-eval, .additional-eval, .left-early').forEach(element => {
+                element.addEventListener('change', updateGrades);
+            });
+        }
+
+        function updateGrades() {
+            currentState.evaluations.forEach((evalObj, index) => {
+                const q1Select = document.querySelector(`.question-eval[data-student="${index}"][data-question="1"]`);
+                const q2Select = document.querySelector(`.question-eval[data-student="${index}"][data-question="2"]`);
+                const q3Select = document.querySelector(`.question-eval[data-student="${index}"][data-question="3"]`);
+                const aq1Select = document.querySelector(`.additional-eval[data-student="${index}"][data-question="4"]`);
+                const aq2Select = document.querySelector(`.additional-eval[data-student="${index}"][data-question="5"]`);
+                const leftCheckbox = document.querySelector(`.left-early[data-student="${index}"]`);
+                
+                evalObj.q1 = q1Select.value;
+                evalObj.q2 = q2Select.value;
+                evalObj.q3 = q3Select.value;
+                evalObj.aq1 = aq1Select.value;
+                evalObj.aq2 = aq2Select.value;
+                evalObj.left = leftCheckbox.checked;
+                
+                // Calculate grade
+                evalObj.grade = calculateGrade(evalObj);
+                
+                // Update display
+                const gradeCell = document.querySelectorAll('.final-grade')[index];
+                gradeCell.textContent = evalObj.grade;
+                
+                // Update grade color
+                gradeCell.className = 'final-grade';
+                if (evalObj.grade !== '-') {
+                    gradeCell.classList.add('grade-' + evalObj.grade);
+                } else {
+                    gradeCell.classList.add('grade-none');
+                }
+            });
+        }
+
+        function calculateGrade(evaluation) {
+            if (evaluation.left) return 'E';
+            
+            // If any question is not answered yet, return '-'
+            if (evaluation.q1 === 'none' || evaluation.q2 === 'none' || evaluation.q3 === 'none') {
+                return '-';
+            }
+            
+            // Count main questions
+            let correctCount = 0;
+            let partialCount = 0;
+            let incorrectCount = 0;
+            
+            [evaluation.q1, evaluation.q2, evaluation.q3].forEach(answer => {
+                if (answer === 'correct') correctCount++;
+                else if (answer === 'partial') partialCount++;
+                else if (answer === 'incorrect') incorrectCount++;
+            });
+            
+            // Count additional questions if answered
+            let additionalCorrect = 0;
+            let additionalPartial = 0;
+            let additionalIncorrect = 0;
+            
+            [evaluation.aq1, evaluation.aq2].forEach(answer => {
+                if (answer !== 'none') {
+                    if (answer === 'correct') additionalCorrect++;
+                    else if (answer === 'partial') additionalPartial++;
+                    else if (answer === 'incorrect') additionalIncorrect++;
+                }
+            });
+            
+            // Apply grading rules with additional questions
+            // If all main questions are correct -> A
+            if (correctCount === 3 && incorrectCount === 0) return 'A';
+            
+            // If 2 main correct and 1 partial -> A
+            if (correctCount === 2 && partialCount === 1 && incorrectCount === 0) return 'A';
+            
+            // If 2 main correct and 1 incorrect -> B
+            if (correctCount === 2 && incorrectCount === 1) return 'B';
+            
+            // If 1 main correct and 2 incorrect -> C
+            if (correctCount === 1 && incorrectCount === 2) return 'C';
+            
+            // If all main incorrect -> F
+            if (incorrectCount === 3) {
+                // But if both additional questions are correct, then B
+                if (additionalCorrect === 2) return 'B';
+                return 'F';
+            }
+            
+            // If we have additional questions answered, they can improve the grade
+            // If 2 main correct and additional questions are correct -> A
+            if (correctCount === 2 && additionalCorrect === 2) return 'A';
+            
+            // If 1 main correct and both additional correct -> B
+            if (correctCount === 1 && additionalCorrect === 2) return 'B';
+            
+            // Default fallback based on main questions
+            if (correctCount >= 2) return 'B';
+            if (correctCount >= 1) return 'C';
+            return 'F';
+        }
+
+        function generateReport() {
+            let report = '```\n';
+            report += `Преподаватель: ${currentState.teacherName}\n\n`;
+            
+            currentState.evaluations.forEach(evalObj => {
+                if (evalObj.grade !== '-') {
+                    report += `${evalObj.name} - ${evalObj.grade}\n`;
+                }
+            });
+            
+            const gradedStudents = currentState.evaluations.filter(evalObj => evalObj.grade !== '-').length;
+            report += `\nОценок: ${gradedStudents}\n`;
+            report += '```';
+            
+            reportContent.textContent = report;
+        }
+
+        function resetToStart() {
+            currentState = {
+                selectedSubject: null,
+                studentCount: 0,
+                studentNames: [],
+                evaluations: [],
+                teacherName: ""
+            };
+            
+            subjectCards.forEach(card => card.classList.remove('selected'));
+            teacherNameInput.value = '';
+            studentCountInput.value = '8';
+            
+            reportSection.classList.add('hidden');
+            evaluationSection.classList.add('hidden');
+            materialDisplaySection.classList.add('hidden');
+            studentNamesSection.classList.add('hidden');
+            subjectSelection.classList.remove('hidden');
+        }
+
+        // Daily Report Functions
+        function addClassLink() {
+            const classLinkDiv = document.createElement('div');
+            classLinkDiv.className = 'class-link';
+            
+            const select = document.createElement('select');
+            select.className = 'form-control class-subject';
+            
+            // Add options for subjects
+            Object.keys(subjectNames).forEach(key => {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = subjectNames[key];
+                select.appendChild(option);
+            });
+            
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'form-control class-link-input';
+            input.placeholder = 'Введите ссылку на пару';
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.className = 'remove-link';
+            removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+            removeBtn.addEventListener('click', function() {
+                classLinkDiv.remove();
+            });
+            
+            classLinkDiv.appendChild(select);
+            classLinkDiv.appendChild(input);
+            classLinkDiv.appendChild(removeBtn);
+            classLinksContainer.appendChild(classLinkDiv);
+        }
+
+        function generateDailyReport() {
+            const date = reportDateInput.value;
+            const classLinks = Array.from(document.querySelectorAll('.class-link')).map(linkDiv => {
+                const subjectSelect = linkDiv.querySelector('.class-subject');
+                const linkInput = linkDiv.querySelector('.class-link-input');
+                return {
+                    subject: subjectSelect.value,
+                    link: linkInput.value.trim()
+                };
+            }).filter(item => item.link !== '');
+            
+            const gradesCount = gradesCountInput.value;
+            const studentsAccepted = studentsAcceptedInput.value;
+            const studentsScreenshot = studentsScreenshotInput.value;
+            const eventsCount = eventsCountInput.value;
+            const eventsScreenshot = eventsScreenshotInput.value;
+            
+            // Format date to DD.MM.YYYY
+            const [year, month, day] = date.split('-');
+            const formattedDate = `${day}.${month}.${year}`;
+            
+            let report = `\`Отчётность о работе за\` ***\`${formattedDate}\`***\n`;
+            report += '```Основная работа за день:```\n';
+            report += '`Количество проведённых пар:`\n';
+            
+            classLinks.forEach(item => {
+                report += `${subjectNames[item.subject]}: ${item.link}\n`;
+            });
+            
+            report += `\`Количество выставленных оценок:\`${gradesCount}\n`;
+            report += `\`Количество принятых студентов:\` ${studentsAccepted}\n`;
+            
+            if (studentsScreenshot) {
+                report += ` ${studentsScreenshot}\n`;
+            }
+            
+            report += `\`Количество проведённых мероприятий:\`${eventsCount}\n`;
+            
+            if (eventsScreenshot) {
+                report += `${eventsScreenshot}\n`;
+            }
+            
+            dailyReportContent.textContent = report;
+            dailyReportResult.classList.remove('hidden');
+        }
+
+        // Add event listeners for removing class links
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-link') || e.target.parentElement.classList.contains('remove-link')) {
+                const removeBtn = e.target.classList.contains('remove-link') ? e.target : e.target.parentElement;
+                removeBtn.parentElement.remove();
+            }
         });
     </script>
 </body>
 </html>
-
-
