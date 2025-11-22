@@ -425,6 +425,38 @@
             align-items: center;
             gap: 5px;
         }
+
+        .accepted-student-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .accepted-student-input input {
+            flex: 1;
+        }
+
+        .event-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .event-item input {
+            flex: 1;
+        }
+
+        .time-inputs {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .time-inputs input {
+            width: 120px;
+        }
     </style>
 </head>
 <body>
@@ -655,23 +687,30 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="students-accepted">Количество принятых студентов:</label>
-                        <input type="number" id="students-accepted" class="form-control" min="0" value="0">
+                        <label>Принятые студенты:</label>
+                        <div id="accepted-students">
+                            <div class="accepted-student-input">
+                                <input type="text" class="form-control accepted-student" placeholder="Введите ник студента">
+                                <button type="button" class="remove-link remove-student"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <button type="button" id="add-accepted-student" class="add-link"><i class="fas fa-plus"></i> Добавить студента</button>
                     </div>
                     
                     <div class="form-group">
-                        <label for="students-screenshot">Ссылка на скриншот принятых студентов:</label>
-                        <input type="text" id="students-screenshot" class="form-control" placeholder="https://imgpile.com/p/2L8IaHz">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="events-count">Количество проведенных мероприятий:</label>
-                        <input type="number" id="events-count" class="form-control" min="0" value="0">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="events-screenshot">Ссылка на скриншот мероприятий:</label>
-                        <input type="text" id="events-screenshot" class="form-control" placeholder="https://imgpile.com/p/Ktbyl0P">
+                        <label>Мероприятия/наборы:</label>
+                        <div id="events-list">
+                            <div class="event-item">
+                                <input type="text" class="form-control event-input" placeholder="Введите название мероприятия">
+                                <div class="time-inputs">
+                                    <input type="text" class="form-control event-start-time" placeholder="Начало (ЧЧ:ММ)">
+                                    <span>-</span>
+                                    <input type="text" class="form-control event-end-time" placeholder="Конец (ЧЧ:ММ)">
+                                </div>
+                                <button type="button" class="remove-link remove-event"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <button type="button" id="add-event" class="add-link"><i class="fas fa-plus"></i> Добавить мероприятие</button>
                     </div>
                     
                     <div class="text-center mt-30">
@@ -816,10 +855,10 @@
         const classLinksContainer = document.getElementById('class-links');
         const addClassLinkBtn = document.getElementById('add-class-link');
         const gradesCountInput = document.getElementById('grades-count');
-        const studentsAcceptedInput = document.getElementById('students-accepted');
-        const studentsScreenshotInput = document.getElementById('students-screenshot');
-        const eventsCountInput = document.getElementById('events-count');
-        const eventsScreenshotInput = document.getElementById('events-screenshot');
+        const acceptedStudentsContainer = document.getElementById('accepted-students');
+        const addAcceptedStudentBtn = document.getElementById('add-accepted-student');
+        const eventsListContainer = document.getElementById('events-list');
+        const addEventBtn = document.getElementById('add-event');
         const generateDailyReportBtn = document.getElementById('generate-daily-report');
         const dailyReportResult = document.getElementById('daily-report-result');
         const dailyReportContent = document.getElementById('daily-report-content');
@@ -911,6 +950,14 @@
         // Daily Report Event Listeners
         addClassLinkBtn.addEventListener('click', () => {
             addClassLink();
+        });
+
+        addAcceptedStudentBtn.addEventListener('click', () => {
+            addAcceptedStudent();
+        });
+
+        addEventBtn.addEventListener('click', () => {
+            addEvent();
         });
 
         generateDailyReportBtn.addEventListener('click', () => {
@@ -1233,6 +1280,71 @@
             classLinksContainer.appendChild(classLinkDiv);
         }
 
+        function addAcceptedStudent() {
+            const studentDiv = document.createElement('div');
+            studentDiv.className = 'accepted-student-input';
+            
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'form-control accepted-student';
+            input.placeholder = 'Введите ник студента';
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.className = 'remove-link remove-student';
+            removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+            removeBtn.addEventListener('click', function() {
+                studentDiv.remove();
+            });
+            
+            studentDiv.appendChild(input);
+            studentDiv.appendChild(removeBtn);
+            acceptedStudentsContainer.appendChild(studentDiv);
+        }
+
+        function addEvent() {
+            const eventDiv = document.createElement('div');
+            eventDiv.className = 'event-item';
+            
+            const nameInput = document.createElement('input');
+            nameInput.type = 'text';
+            nameInput.className = 'form-control event-input';
+            nameInput.placeholder = 'Введите название мероприятия';
+            
+            const timeInputsDiv = document.createElement('div');
+            timeInputsDiv.className = 'time-inputs';
+            
+            const startTimeInput = document.createElement('input');
+            startTimeInput.type = 'text';
+            startTimeInput.className = 'form-control event-start-time';
+            startTimeInput.placeholder = 'Начало (ЧЧ:ММ)';
+            
+            const dashSpan = document.createElement('span');
+            dashSpan.textContent = '-';
+            
+            const endTimeInput = document.createElement('input');
+            endTimeInput.type = 'text';
+            endTimeInput.className = 'form-control event-end-time';
+            endTimeInput.placeholder = 'Конец (ЧЧ:ММ)';
+            
+            timeInputsDiv.appendChild(startTimeInput);
+            timeInputsDiv.appendChild(dashSpan);
+            timeInputsDiv.appendChild(endTimeInput);
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.className = 'remove-link remove-event';
+            removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+            removeBtn.addEventListener('click', function() {
+                eventDiv.remove();
+            });
+            
+            eventDiv.appendChild(nameInput);
+            eventDiv.appendChild(timeInputsDiv);
+            eventDiv.appendChild(removeBtn);
+            eventsListContainer.appendChild(eventDiv);
+        }
+
         function generateDailyReport() {
             const date = reportDateInput.value;
             const classLinks = Array.from(document.querySelectorAll('.class-link')).map(linkDiv => {
@@ -1245,10 +1357,20 @@
             }).filter(item => item.link !== '');
             
             const gradesCount = gradesCountInput.value;
-            const studentsAccepted = studentsAcceptedInput.value;
-            const studentsScreenshot = studentsScreenshotInput.value;
-            const eventsCount = eventsCountInput.value;
-            const eventsScreenshot = eventsScreenshotInput.value;
+            const acceptedStudents = Array.from(document.querySelectorAll('.accepted-student'))
+                .map(input => input.value.trim())
+                .filter(name => name !== '');
+            
+            const events = Array.from(document.querySelectorAll('.event-item')).map(eventDiv => {
+                const nameInput = eventDiv.querySelector('.event-input');
+                const startTimeInput = eventDiv.querySelector('.event-start-time');
+                const endTimeInput = eventDiv.querySelector('.event-end-time');
+                return {
+                    name: nameInput.value.trim(),
+                    startTime: startTimeInput.value.trim(),
+                    endTime: endTimeInput.value.trim()
+                };
+            }).filter(item => item.name !== '');
             
             // Format date to DD.MM.YYYY
             const [year, month, day] = date.split('-');
@@ -1256,30 +1378,42 @@
             
             let report = `\`Отчётность о работе за\` ***\`${formattedDate}\`***\n`;
             report += '```Основная работа за день:```\n';
-            report += '`Количество проведённых пар:`\n';
             
-            classLinks.forEach(item => {
-                report += `${subjectNames[item.subject]}: ${item.link}\n`;
+            // Calculate classes count
+            const mainClassesCount = classLinks.length;
+            
+            report += `\`Количество проведённых пар: ${mainClassesCount}\`\n`;
+            
+            // Add class links
+            classLinks.forEach((item, index) => {
+                report += `> ${index + 1}. ${subjectNames[item.subject]}: ${item.link}\n`;
             });
             
-            report += `\`Количество выставленных оценок:\`${gradesCount}\n`;
-            report += `\`Количество принятых студентов:\` ${studentsAccepted}\n`;
+            report += `\`Количество выставленных оценок: ${gradesCount}\`\n`;
+            report += `\`Количество принятых студентов: ${acceptedStudents.length}\`\n`;
             
-            if (studentsScreenshot) {
-                report += ` ${studentsScreenshot}\n`;
+            if (acceptedStudents.length > 0) {
+                report += `${acceptedStudents.join(' ')}\n`;
             }
             
-            report += `\`Количество проведённых мероприятий:\`${eventsCount}\n`;
-            
-            if (eventsScreenshot) {
-                report += `${eventsScreenshot}\n`;
+            if (events.length > 0) {
+                report += `\`Количество проведённых мероприятий: ${events.length}\`\n`;
+                events.forEach(event => {
+                    if (event.startTime && event.endTime) {
+                        report += `${event.name}: ${event.startTime} - ${event.endTime}\n`;
+                    } else {
+                        report += `${event.name}\n`;
+                    }
+                });
+            } else {
+                report += `\`Количество проведённых мероприятий: -\`\n`;
             }
             
             dailyReportContent.textContent = report;
             dailyReportResult.classList.remove('hidden');
         }
 
-        // Add event listeners for removing class links
+        // Add event listeners for removing items
         document.addEventListener('click', function(e) {
             if (e.target.classList.contains('remove-link') || e.target.parentElement.classList.contains('remove-link')) {
                 const removeBtn = e.target.classList.contains('remove-link') ? e.target : e.target.parentElement;
