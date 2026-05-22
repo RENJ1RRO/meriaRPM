@@ -66,19 +66,13 @@ const subjectNames = {
   history: 'История', literature: 'Литература', social: 'Обществознание', pe: 'Физкультура'
 };
 
-/* ── Grading system (transparent point-based) ──────────────────
+/* ── Standard grading system (transparent point-based) ─────────
    Main questions Q1-Q3 (required): correct=2, partial=1, incorrect=0  → max 6pts
    Bonus questions BQ1-BQ2 (optional): correct=1, partial=0.5, incorrect=0 → max +2pts
 
-   Final score = main_pts + bonus_pts   (bonus is additive, range 0-2)
-
-   Grade thresholds (out of 6 main + 2 bonus = 8 max):
-     A  ≥ 5.5  (e.g. all correct or 2×correct + 1×partial + any bonus)
-     B  ≥ 4    (e.g. 2×correct + bonus, or near-perfect main)
-     C  ≥ 3    (2×correct, nothing more)
-     D  ≥ 2    (1×correct + 1×partial, or 2×partial+...)
-     F  < 2    (mostly wrong)
-     E  = student left early (auto, overrides all)
+   Grade thresholds (out of 8 max):
+     A  ≥ 5.5 · B  ≥ 4 · C  ≥ 3 · D  ≥ 2 · F  < 2
+     E  = student left early (overrides all)
 ────────────────────────────────────────────────────────────── */
 
 const POINT_MAP = { correct: 2, partial: 1, incorrect: 0, none: null };
@@ -86,7 +80,7 @@ const BONUS_MAP = { correct: 1, partial: 0.5, incorrect: 0, none: 0 };
 
 function calcScore(ev) {
   const mainVals = [ev.q1, ev.q2, ev.q3];
-  if (mainVals.some(v => v === 'none')) return null; // not yet answered
+  if (mainVals.some(v => v === 'none')) return null;
   const mainPts = mainVals.reduce((s, v) => s + POINT_MAP[v], 0);
   const bonusPts = [ev.aq1, ev.aq2].reduce((s, v) => s + BONUS_MAP[v], 0);
   return { main: mainPts, bonus: bonusPts, total: mainPts + bonusPts };
@@ -103,6 +97,44 @@ function calcGrade(ev) {
   if (t >= 2)   return 'D';
   return 'F';
 }
+
+/* ── PE grading system ──────────────────────────────────────────
+   3 required RP commands: /me, /do, /todo — each: done=2, partial=1, not done=0 → max 6pts
+   1 bonus command: /try — done=+1, partial=+0.5 → max +1pt  (total max = 7)
+
+   Grade thresholds (out of 7 max):
+     A  ≥ 5.5  (all 3 done well + any bonus, or all perfect)
+     B  ≥ 4    (all 3 at least partial, or 2 done + bonus)
+     C  ≥ 3    (2 commands done, 1 failed)
+     D  ≥ 2    (1 done + 1 partial, struggling)
+     F  < 2    (mostly failed)
+     E  = left early
+────────────────────────────────────────────────────────────── */
+
+const PE_POINT_MAP = { done: 2, partial: 1, notdone: 0, none: null };
+const PE_BONUS_MAP = { done: 1, partial: 0.5, notdone: 0, none: 0 };
+
+function calcScorePE(ev) {
+  const mainVals = [ev.q1, ev.q2, ev.q3]; // /me, /do, /todo
+  if (mainVals.some(v => v === 'none')) return null;
+  const mainPts = mainVals.reduce((s, v) => s + PE_POINT_MAP[v], 0);
+  const bonusPts = PE_BONUS_MAP[ev.aq1] || 0; // /try
+  return { main: mainPts, bonus: bonusPts, total: mainPts + bonusPts };
+}
+
+function calcGradePE(ev) {
+  if (ev.left) return 'E';
+  const score = calcScorePE(ev);
+  if (score === null) return '-';
+  const t = score.total;
+  if (t >= 5.5) return 'A';
+  if (t >= 4)   return 'B';
+  if (t >= 3)   return 'C';
+  if (t >= 2)   return 'D';
+  return 'F';
+}
+
+function isPE() { return state.subject === 'pe'; }
 
 function gradeColor(g) {
   return { A: '#3ecf8e', B: '#3e96cf', C: '#f5a623', D: '#f0963c', E: '#f06060', F: '#c84040' }[g] || '#555d75';
@@ -209,21 +241,95 @@ $('btn-next-eval').addEventListener('click', () => {
 function renderEvalTable() {
   const tbody = $('eval-tbody');
   tbody.innerHTML = '';
+  const pe = isPE();
+
+  // Update subtitle
+  $('eval-card-sub').textContent = pe
+    ? 'Проверьте выполнение трёх РП-команд (/me, /do, /todo) и дополнительной (/try)'
+    : 'Задайте каждому студенту 3 обязательных вопроса и до 2 дополнительных';
+
   state.evals = state.names.map(name => ({
     name, q1: 'none', q2: 'none', q3: 'none',
     aq1: 'none', aq2: 'none', left: false, grade: '-'
   }));
+
+  // Update table headers dynamically
+  const thead = $('eval-thead');
+  if (pe) {
+    thead.innerHTML = `<tr>
+      <th>Студент</th>
+      <th>/me</th>
+      <th>/do</th>
+      <th>/todo</th>
+      <th>/try (доп.)</th>
+      <th>Ушёл</th>
+      <th>Оценка</th>
+      <th>Баллы</th>
+    </tr>`;
+  } else {
+    thead.innerHTML = `<tr>
+      <th>Студент</th>
+      <th>Вопрос 1</th>
+      <th>Вопрос 2</th>
+      <th>Вопрос 3</th>
+      <th>Доп. 1</th>
+      <th>Доп. 2</th>
+      <th>Ушёл</th>
+      <th>Оценка</th>
+      <th>Баллы</th>
+    </tr>`;
+  }
+
+  // Update legend
+  const legend = $('grade-legend');
+  if (pe) {
+    legend.innerHTML = `
+      <div class="legend-item"><span class="grade-pill grade-A">A</span><span>≥ 5.5 баллов</span></div>
+      <span class="legend-sep">·</span>
+      <div class="legend-item"><span class="grade-pill grade-B">B</span><span>≥ 4 баллов</span></div>
+      <span class="legend-sep">·</span>
+      <div class="legend-item"><span class="grade-pill grade-C">C</span><span>≥ 3 баллов</span></div>
+      <span class="legend-sep">·</span>
+      <div class="legend-item"><span class="grade-pill grade-D">D</span><span>≥ 2 баллов</span></div>
+      <span class="legend-sep">·</span>
+      <div class="legend-item"><span class="grade-pill grade-F">F</span><span>&lt; 2 баллов</span></div>
+      <span class="legend-sep">·</span>
+      <div class="legend-item"><span class="grade-pill grade-E">E</span><span>Ушёл досрочно</span></div>
+      <span class="legend-sep">·</span>
+      <span style="font-size:12px;color:var(--text3)">
+        /me, /do, /todo: Выполнил=2 · Частично=1 · Не выполнил=0 (макс 6) &nbsp;·&nbsp; /try (доп.): Выполнил=+1 · Частично=+0.5 &nbsp;·&nbsp; Макс=7
+      </span>
+    `;
+  } else {
+    legend.innerHTML = `
+      <div class="legend-item"><span class="grade-pill grade-A">A</span><span>≥ 5.5 баллов</span></div>
+      <span class="legend-sep">·</span>
+      <div class="legend-item"><span class="grade-pill grade-B">B</span><span>≥ 4 баллов</span></div>
+      <span class="legend-sep">·</span>
+      <div class="legend-item"><span class="grade-pill grade-C">C</span><span>≥ 3 баллов</span></div>
+      <span class="legend-sep">·</span>
+      <div class="legend-item"><span class="grade-pill grade-D">D</span><span>≥ 2 баллов</span></div>
+      <span class="legend-sep">·</span>
+      <div class="legend-item"><span class="grade-pill grade-F">F</span><span>&lt; 2 баллов</span></div>
+      <span class="legend-sep">·</span>
+      <div class="legend-item"><span class="grade-pill grade-E">E</span><span>Ушёл досрочно</span></div>
+      <span class="legend-sep">·</span>
+      <span style="font-size:12px;color:var(--text3)">
+        Правильно=2 · 50/50=1 · Неправильно=0 · Доп.правильно=+1 · Доп.50/50=+0.5 · Макс=8
+      </span>
+    `;
+  }
 
   state.names.forEach((name, i) => {
     const tr = document.createElement('tr');
     tr.dataset.student = i;
     tr.innerHTML = `
       <td class="student-name-cell">${escHtml(name)}</td>
-      ${makeEvalCell(i, 'q1', false)}
-      ${makeEvalCell(i, 'q2', false)}
-      ${makeEvalCell(i, 'q3', false)}
-      ${makeEvalCell(i, 'aq1', true)}
-      ${makeEvalCell(i, 'aq2', true)}
+      ${pe ? makePECell(i, 'q1', '/me')   : makeEvalCell(i, 'q1', false)}
+      ${pe ? makePECell(i, 'q2', '/do')   : makeEvalCell(i, 'q2', false)}
+      ${pe ? makePECell(i, 'q3', '/todo') : makeEvalCell(i, 'q3', false)}
+      ${pe ? makePEBonusCell(i, 'aq1')    : makeEvalCell(i, 'aq1', true)}
+      ${pe ? ''                            : makeEvalCell(i, 'aq2', true)}
       <td style="text-align:center">
         <input type="checkbox" class="left-early-cb" data-student="${i}">
       </td>
@@ -240,7 +346,6 @@ function renderEvalTable() {
     tbody.appendChild(tr);
   });
 
-  // Attach events
   $$('.eval-select').forEach(sel => sel.addEventListener('change', onEvalChange));
   $$('.left-early-cb').forEach(cb => cb.addEventListener('change', onEvalChange));
 }
@@ -257,6 +362,28 @@ function makeEvalCell(i, key, optional) {
   </td>`;
 }
 
+function makePECell(i, key, cmdLabel) {
+  return `<td>
+    <select class="eval-select" data-student="${i}" data-key="${key}" title="${cmdLabel}">
+      <option value="none">—</option>
+      <option value="done">✓ Выполнил</option>
+      <option value="partial">≈ Частично</option>
+      <option value="notdone">✗ Не выполнил</option>
+    </select>
+  </td>`;
+}
+
+function makePEBonusCell(i, key) {
+  return `<td>
+    <select class="eval-select" data-student="${i}" data-key="${key}" title="/try (бонус)">
+      <option value="none">— (доп.)</option>
+      <option value="done">✓ Выполнил</option>
+      <option value="partial">≈ Частично</option>
+      <option value="notdone">✗ Не выполнил</option>
+    </select>
+  </td>`;
+}
+
 function onEvalChange(e) {
   const el = e.target;
   const i = parseInt(el.dataset.student);
@@ -267,27 +394,31 @@ function onEvalChange(e) {
   } else {
     const key = el.dataset.key;
     ev[key] = el.value;
-    // Update select styling
     el.className = 'eval-select';
-    if (el.value !== 'none') el.classList.add('val-' + el.value);
+    // PE uses done/partial/notdone; standard uses correct/partial/incorrect
+    const v = el.value;
+    if (v === 'correct' || v === 'done') el.classList.add('val-correct');
+    else if (v === 'partial') el.classList.add('val-partial');
+    else if (v === 'incorrect' || v === 'notdone') el.classList.add('val-incorrect');
   }
 
-  ev.grade = calcGrade(ev);
+  ev.grade = isPE() ? calcGradePE(ev) : calcGrade(ev);
   updateStudentDisplay(i);
 }
 
 function updateStudentDisplay(i) {
   const ev = state.evals[i];
   const grade = ev.grade;
+  const pe = isPE();
 
-  // Grade pill
   const gradeCell = $('grade-cell-' + i);
   const cls = grade === '-' ? 'grade-none' : 'grade-' + grade;
   gradeCell.innerHTML = `<span class="grade-pill ${cls}">${grade === '-' ? '—' : grade}</span>`;
 
-  // Score bar
   const scoreCell = $('score-cell-' + i);
-  const score = calcScore(ev);
+  const score = pe ? calcScorePE(ev) : calcScore(ev);
+  const maxScore = pe ? 7 : 8;
+
   if (ev.left) {
     scoreCell.innerHTML = `<div class="score-bar-wrap"><span class="score-val" style="color:var(--danger)">Ушёл</span></div>`;
     return;
@@ -296,7 +427,7 @@ function updateStudentDisplay(i) {
     scoreCell.innerHTML = `<div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:0%;background:var(--text3)"></div></div><span class="score-val">—</span></div>`;
     return;
   }
-  const pct = Math.round((score.total / 8) * 100);
+  const pct = Math.round((score.total / maxScore) * 100);
   const color = gradeColor(grade);
   scoreCell.innerHTML = `
     <div class="score-bar-wrap">
