@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Университет штата RPM North</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+  <div class="header-inner">
+    <div class="logo-mark">
+      <div class="logo-badge">UN</div>
+      <div class="logo-text">
+        <h1>Университет штата RPM North</h1>
+        <p>Храм знаний и профессионального роста</p>
+      </div>
+    </div>
+    <nav>
+      <a href="#section-subjects">Пары</a>
+      <a href="#section-daily">Отчётность</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Учебный портал</div>
+    <h2>Добро пожаловать в <span>RPM North</span></h2>
+    <p>Готовим специалистов, способных внести вклад в развитие нашего штата. Портал для преподавателей.</p>
+    <a href="#section-subjects" class="btn">
+      <i class="fas fa-graduation-cap"></i> Начать пару
+    </a>
+  </div>
+</section>
+
+<!-- ── Main ── -->
+<main>
+
+  <!-- ─ PAIRS SECTION ─ -->
+  <section id="section-subjects">
+    <div class="section-header">
+      <div>
+        <h2>Проведение пары</h2>
+        <p>Выберите предмет, добавьте студентов, объясните материал и выставьте оценки</p>
+      </div>
+    </div>
+
+    <!-- Step indicators -->
+    <div class="steps">
+      <div class="step active" id="step-select">
+        <div class="step-num">1</div>
+        <span>Предмет</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step-names">
+        <div class="step-num">2</div>
+        <span>Студенты</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step-material">
+        <div class="step-num">3</div>
+        <span>Материал</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step-eval">
+        <div class="step-num">4</div>
+        <span>Оценки</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step-report">
+        <div class="step-num">5</div>
+        <span>Отчёт</span>
+      </div>
+    </div>
+
+    <!-- Panel 1: Subject selection -->
+    <div class="card" id="panel-select">
+      <div class="card-title"><i class="fas fa-book"></i> Выберите предмет и данные пары</div>
+      <p class="card-sub">Укажите ваш никнейм, количество студентов и кликните на предмет</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="mb-16">
+        <div class="form-group" style="margin-bottom:0">
+          <label>Ник преподавателя</label>
+          <input type="text" id="input-teacher" class="form-control" placeholder="Ваш никнейм в игре">
+        </div>
+        <div class="form-group" style="margin-bottom:0">
+          <label>Количество студентов</label>
+          <input type="number" id="input-count" class="form-control" min="1" max="50" value="8">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Предмет</label>
+        <div class="subject-grid">
+          <div class="subject-card" data-subject="math">
+            <div class="subject-icon"><i class="fas fa-calculator"></i></div>
+            <h3>Математика</h3>
+            <p>Лаунчер, TG-бот, жалобы</p>
+          </div>
+          <div class="subject-card" data-subject="physics">
+            <div class="subject-icon"><i class="fas fa-atom"></i></div>
+            <h3>Физика</h3>
+            <p>IC/OOC чаты, рации, войс</p>
+          </div>
+          <div class="subject-card" data-subject="informatics">
+            <div class="subject-icon"><i class="fas fa-laptop-code"></i></div>
+            <h3>Информатика</h3>
+            <p>2FA, Discord, GPS, телефон</p>
+          </div>
+          <div class="subject-card" data-subject="history">
+            <div class="subject-icon"><i class="fas fa-landmark"></i></div>
+            <h3>История</h3>
+            <p>Терминология, чаты, наборы</p>
+          </div>
+          <div class="subject-card" data-subject="literature">
+            <div class="subject-icon"><i class="fas fa-book-open"></i></div>
+            <h3>Литература</h3>
+            <p>Правила университета и проекта</p>
+          </div>
+          <div class="subject-card" data-subject="social">
+            <div class="subject-icon"><i class="fas fa-users"></i></div>
+            <h3>Обществознание</h3>
+            <p>Конституция, фракции, экскурсия</p>
+          </div>
+          <div class="subject-card" data-subject="pe">
+            <div class="subject-icon"><i class="fas fa-running"></i></div>
+            <h3>Физкультура</h3>
+            <p>РП-отыгрыш, команды, войс</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-end mt-16">
+        <button id="btn-next-names" class="btn">Далее <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- Panel 2: Student names -->
+    <div class="card hidden" id="panel-names">
+      <div class="card-title"><i class="fas fa-users"></i> Никнеймы студентов</div>
+      <p class="card-sub">Введите игровые никнеймы всех присутствующих студентов</p>
+      <div class="names-grid" id="names-grid"></div>
+      <div class="flex-end mt-24">
+        <button class="btn btn-ghost btn-sm" onclick="showPanel('select')"><i class="fas fa-arrow-left"></i> Назад</button>
+        <button id="btn-next-material" class="btn">Продолжить <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- Panel 3: Material -->
+    <div class="card hidden" id="panel-material">
+      <div class="card-title"><i class="fas fa-chalkboard-teacher"></i> Материал пары</div>
+      <p class="card-sub">Ознакомьтесь с программой и объясните все темы студентам</p>
+      <div id="material-content" class="material-content mt-16"></div>
+      <div class="flex-end mt-24">
+        <button class="btn btn-ghost btn-sm" onclick="showPanel('names')"><i class="fas fa-arrow-left"></i> Назад</button>
+        <button id="btn-next-eval" class="btn">Материал объяснён <i class="fas fa-check"></i></button>
+      </div>
+    </div>
+
+    <!-- Panel 4: Evaluation -->
+    <div class="card hidden" id="panel-eval">
+      <div class="card-title"><i class="fas fa-clipboard-check"></i> Оценивание студентов</div>
+      <p class="card-sub">Задайте каждому студенту 3 обязательных вопроса и до 2 дополнительных</p>
+
+      <!-- Grade system explanation -->
+      <div class="grade-legend">
+        <div class="legend-item">
+          <span class="grade-pill grade-A">A</span>
+          <span>≥ 5.5 баллов</span>
+        </div>
+        <span class="legend-sep">·</span>
+        <div class="legend-item">
+          <span class="grade-pill grade-B">B</span>
+          <span>≥ 4 баллов</span>
+        </div>
+        <span class="legend-sep">·</span>
+        <div class="legend-item">
+          <span class="grade-pill grade-C">C</span>
+          <span>≥ 3 баллов</span>
+        </div>
+        <span class="legend-sep">·</span>
+        <div class="legend-item">
+          <span class="grade-pill grade-D">D</span>
+          <span>≥ 2 баллов</span>
+        </div>
+        <span class="legend-sep">·</span>
+        <div class="legend-item">
+          <span class="grade-pill grade-F">F</span>
+          <span>&lt; 2 баллов</span>
+        </div>
+        <span class="legend-sep">·</span>
+        <div class="legend-item">
+          <span class="grade-pill grade-E">E</span>
+          <span>Ушёл досрочно</span>
+        </div>
+        <span class="legend-sep">·</span>
+        <span style="font-size:12px;color:var(--text3)">
+          Правильно=2 · 50/50=1 · Неправильно=0 · Доп.правильно=+1 · Доп.50/50=+0.5 · Макс=8
+        </span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Студент</th>
+              <th>Вопрос 1</th>
+              <th>Вопрос 2</th>
+              <th>Вопрос 3</th>
+              <th>Доп. 1</th>
+              <th>Доп. 2</th>
+              <th>Ушёл</th>
+              <th>Оценка</th>
+              <th>Баллы</th>
+            </tr>
+          </thead>
+          <tbody id="eval-tbody"></tbody>
+        </table>
+      </div>
+
+      <div class="flex-end mt-24">
+        <button class="btn btn-ghost btn-sm" onclick="showPanel('material')"><i class="fas fa-arrow-left"></i> Назад</button>
+        <button id="btn-reset-1" class="btn btn-ghost btn-sm"><i class="fas fa-redo"></i> Новая пара</button>
+        <button id="btn-generate-report" class="btn">Сгенерировать отчёт <i class="fas fa-file-alt"></i></button>
+      </div>
+    </div>
+
+    <!-- Panel 5: Report -->
+    <div class="card hidden" id="panel-report">
+      <div class="card-title"><i class="fas fa-file-alt"></i> Отчёт по паре</div>
+      <p class="card-sub">Скопируйте текст и отправьте в нужный Discord-канал</p>
+      <pre id="report-content" class="report-box mt-16"></pre>
+      <div class="flex-end mt-16">
+        <button id="btn-reset-2" class="btn btn-ghost btn-sm"><i class="fas fa-redo"></i> Новая пара</button>
+        <button id="btn-copy-report" class="btn"><i class="fas fa-copy"></i> Копировать</button>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ─ DAILY REPORT SECTION ─ -->
+  <section id="section-daily">
+    <div class="section-header">
+      <div>
+        <h2>Дневная отчётность</h2>
+        <p>Заполните форму для создания сводного отчёта за день</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><i class="fas fa-clipboard-list"></i> Отчёт о работе за день</div>
+      <p class="card-sub">Укажите проведённые пары, оценки, принятых студентов и мероприятия</p>
+
+      <div class="form-group">
+        <label>Дата отчёта</label>
+        <input type="date" id="report-date" class="form-control" style="max-width:200px">
+      </div>
+
+      <div class="form-group">
+        <label>Ссылки на проведённые пары</label>
+        <div id="class-links">
+          <div class="dynamic-row">
+            <select class="form-control class-subject" style="flex:0 0 150px">
+              <option value="math">Математика</option>
+              <option value="physics">Физика</option>
+              <option value="informatics">Информатика</option>
+              <option value="history">История</option>
+              <option value="literature">Литература</option>
+              <option value="social">Обществознание</option>
+              <option value="pe">Физкультура</option>
+            </select>
+            <input type="text" class="form-control" placeholder="Ссылка на пару">
+            <button type="button" class="remove-btn" onclick="this.closest('.dynamic-row').remove()">✕</button>
+          </div>
+        </div>
+        <button type="button" id="btn-add-class" class="add-row-btn mt-8">
+          <i class="fas fa-plus"></i> Добавить пару
+        </button>
+      </div>
+
+      <div class="form-group">
+        <label>Количество выставленных оценок</label>
+        <input type="number" id="grades-count" class="form-control" min="0" value="0" style="max-width:140px">
+      </div>
+
+      <div class="form-group">
+        <label>Принятые студенты</label>
+        <div id="accepted-students">
+          <div class="dynamic-row">
+            <input type="text" class="form-control" placeholder="Никнейм студента">
+            <button type="button" class="remove-btn" onclick="this.closest('.dynamic-row').remove()">✕</button>
+          </div>
+        </div>
+        <button type="button" id="btn-add-student" class="add-row-btn mt-8">
+          <i class="fas fa-plus"></i> Добавить студента
+        </button>
+      </div>
+
+      <div class="form-group">
+        <label>Мероприятия / наборы</label>
+        <div id="events-list">
+          <div class="dynamic-row">
+            <input type="text" class="form-control" placeholder="Название мероприятия">
+            <div class="time-pair">
+              <input type="text" class="form-control" placeholder="ЧЧ:ММ">
+              <span>—</span>
+              <input type="text" class="form-control" placeholder="ЧЧ:ММ">
+            </div>
+            <button type="button" class="remove-btn" onclick="this.closest('.dynamic-row').remove()">✕</button>
+          </div>
+        </div>
+        <button type="button" id="btn-add-event" class="add-row-btn mt-8">
+          <i class="fas fa-plus"></i> Добавить мероприятие
+        </button>
+      </div>
+
+      <div class="flex-end mt-24">
+        <button id="btn-generate-daily" class="btn">
+          <i class="fas fa-file-alt"></i> Сгенерировать отчёт
+        </button>
+      </div>
+    </div>
+
+    <!-- Daily report result -->
+    <div class="card hidden" id="daily-report-result">
+      <div class="card-title"><i class="fas fa-check-circle" style="color:var(--success)"></i> Дневной отчёт готов</div>
+      <p class="card-sub">Скопируйте и отправьте в Discord</p>
+      <pre id="daily-report-content" class="report-box mt-16"></pre>
+      <div class="flex-end mt-16">
+        <button id="btn-reset-daily" class="btn btn-ghost btn-sm"><i class="fas fa-redo"></i> Новый отчёт</button>
+        <button id="btn-copy-daily" class="btn"><i class="fas fa-copy"></i> Копировать</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Университет штата RPM North &nbsp;·&nbsp; Портал преподавателей</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
