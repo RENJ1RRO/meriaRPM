@@ -165,48 +165,16 @@
     <!-- Panel 4: Evaluation -->
     <div class="card hidden" id="panel-eval">
       <div class="card-title"><i class="fas fa-clipboard-check"></i> Оценивание студентов</div>
-      <p class="card-sub">Задайте каждому студенту 3 обязательных вопроса и до 2 дополнительных</p>
+      <p class="card-sub" id="eval-card-sub">Задайте каждому студенту 3 обязательных вопроса и до 2 дополнительных</p>
 
       <!-- Grade system explanation -->
-      <div class="grade-legend">
-        <div class="legend-item">
-          <span class="grade-pill grade-A">A</span>
-          <span>≥ 5.5 баллов</span>
-        </div>
-        <span class="legend-sep">·</span>
-        <div class="legend-item">
-          <span class="grade-pill grade-B">B</span>
-          <span>≥ 4 баллов</span>
-        </div>
-        <span class="legend-sep">·</span>
-        <div class="legend-item">
-          <span class="grade-pill grade-C">C</span>
-          <span>≥ 3 баллов</span>
-        </div>
-        <span class="legend-sep">·</span>
-        <div class="legend-item">
-          <span class="grade-pill grade-D">D</span>
-          <span>≥ 2 баллов</span>
-        </div>
-        <span class="legend-sep">·</span>
-        <div class="legend-item">
-          <span class="grade-pill grade-F">F</span>
-          <span>&lt; 2 баллов</span>
-        </div>
-        <span class="legend-sep">·</span>
-        <div class="legend-item">
-          <span class="grade-pill grade-E">E</span>
-          <span>Ушёл досрочно</span>
-        </div>
-        <span class="legend-sep">·</span>
-        <span style="font-size:12px;color:var(--text3)">
-          Правильно=2 · 50/50=1 · Неправильно=0 · Доп.правильно=+1 · Доп.50/50=+0.5 · Макс=8
-        </span>
+      <div class="grade-legend" id="grade-legend">
+        <!-- Filled by script based on subject -->
       </div>
 
       <div class="table-wrap">
         <table>
-          <thead>
+          <thead id="eval-thead">
             <tr>
               <th>Студент</th>
               <th>Вопрос 1</th>
